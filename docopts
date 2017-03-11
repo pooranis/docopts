@@ -29,6 +29,7 @@ Options:
   -s <str>, --separator=<str>   The string to use to separate the help message
                                 from the version message when both are given
                                 via standard input. [default: ----]
+  -B, --better-value            Save options with arguments as argument name.
 
 """
 
@@ -101,6 +102,7 @@ argv = args['<argv>']
 doc = args['--help']
 version = args['--version']
 options_first = args['--options-first']
+better_value = args['--better-value']
 help = not args['--no-help']
 name = args['-A']
 separator = args['--separator']
@@ -120,7 +122,7 @@ try:
     stdout = sys.stdout
     sys.stdout = StringIO()
     exit_message = None
-    args = docopt(doc, argv, help, version, options_first)
+    args = docopt(doc, argv, help, version, options_first, better_value)
 except DocoptLanguageError as e:
     # invalid docstring by user
     sys.exit("%s: invalid doc argument: %s" % (sys.argv[0], e))
